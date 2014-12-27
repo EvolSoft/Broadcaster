@@ -1,0 +1,12 @@
+---
+prefix: "Broadcaster"
+suffix: "[A]"
+time: 15
+sendmessage-format: "[{TIME}] [{PREFIX}] {SUFFIX} {SENDER}> {MESSAGE}"
+datetime-format: "H:i:s"
+broadcast-enabled: true
+messages:
+ - "[{TIME}] [{PREFIX}] 1st message"
+ - "[{TIME}] [{PREFIX}] 2nd message"
+ - "[{TIME}] [{PREFIX}] 3rd message"
+...
