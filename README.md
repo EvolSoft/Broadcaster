@@ -23,11 +23,12 @@ You can also customize prefix, suffix and interval. (read documentation)
 
 **Commands:**
 
-<dd><b>/broadcaster</b> <i>- Broadcaster commands</i></dd>
-<dd><b>/sendmessage</b> <i>- Send message to specified player (* for all players)</i></dd>
+<dd><i><b>/broadcaster</b> - Broadcaster commands</i></dd>
+<dd><i><b>/sendmessage</b> - Send message to specified player (* for all players)</i></dd>
 <br>
 **To-Do:**
 <br>
+
 *- Bug fix (if bugs will be found)*
 
 ## Documentation
@@ -100,6 +101,7 @@ messages:
 <dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
 <br>
 **Permissions:**
+<br>
 
 - <dd><i><b>broadcaster.*</b> - Broadcaster commands permissions.</i>
 - <dd><i><b>broadcaster.info</b> - Allows player to read info about Broadcaster.</i>
