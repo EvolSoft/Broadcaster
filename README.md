@@ -23,8 +23,8 @@ You can also customize prefix, suffix and interval. (read documentation)
 
 **Commands:**
 
-***/broadcaster*** *- Broadcaster commands*<br>
-***/sendmessage*** *- Send message to specified player (* for all players)*
+***/broadcaster*** *- Broadcaster commands*
+<dd><b>/sendmessage</b> <i>- Send message to specified player (* for all players)</i></dd>
 
 **To-Do:**
 
@@ -96,8 +96,8 @@ messages:
 
 **Commands:**
 
-***/broadcaster*** *- Broadcaster commands (aliases: [bc, broadcast])*<br>
-***/sendmessage <to player (* for all players)> <message>*** *- Send message to player (aliases: [sm, smsg])*
+***/broadcaster*** *- Broadcaster commands (aliases: [bc, broadcast])*
+<dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
 
 **Permissions:**
 
