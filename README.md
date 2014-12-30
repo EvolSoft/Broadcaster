@@ -27,7 +27,7 @@ You can also customize prefix, suffix and interval. (read documentation)
 <dd><b>/sendmessage</b> <i>- Send message to specified player (* for all players)</i></dd>
 <br>
 **To-Do:**
-
+<br>
 *- Bug fix (if bugs will be found)*
 
 ## Documentation
