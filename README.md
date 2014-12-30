@@ -25,7 +25,7 @@ You can also customize prefix, suffix and interval. (read documentation)
 
 <dd><b>/broadcaster</b> <i>- Broadcaster commands</i></dd>
 <dd><b>/sendmessage</b> <i>- Send message to specified player (* for all players)</i></dd>
-
+<br>
 **To-Do:**
 
 *- Bug fix (if bugs will be found)*
@@ -97,8 +97,8 @@ messages:
 **Commands:**
 
 <dd><b><i>/broadcaster</b> - Broadcaster commands (aliases: [bc, broadcast])</i></dd>
-<dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd><br>
-
+<dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
+<br>
 **Permissions:**
 
 - <dd><i><b>broadcaster.*</b> - Broadcaster commands permissions.</i>
