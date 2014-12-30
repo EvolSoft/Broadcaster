@@ -100,8 +100,7 @@ messages:
 <dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
 <br>
 **Permissions:**
-<br>
-
+<br><br>
 - <dd><i><b>broadcaster.*</b> - Broadcaster commands permissions.</i>
 - <dd><i><b>broadcaster.info</b> - Allows player to read info about Broadcaster.</i>
 - <dd><i><b>broadcaster.reload</b> - Allows player to reload Broadcaster.</i>
