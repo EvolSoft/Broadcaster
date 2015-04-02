@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Broadcaster (v1.14) by EvolSoft
+ * Broadcaster (v1.15) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 01:48 PM (UTC)
- * Copyright & License: (C) 2014 EvolSoft
+ * Date: 02/04/2015 02:54 PM (UTC)
+ * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -23,13 +23,15 @@ class Main extends PluginBase{
 	
 	//About Plugin Const
 	const PRODUCER = "EvolSoft";
-	const VERSION = "1.14";
+	const VERSION = "1.15";
 	const MAIN_WEBSITE = "http://www.evolsoft.tk";
 	//Other Const
 	//Prefix
 	const PREFIX = "&9[&eBroadcaster&9] ";
 	
     public $cfg;
+    
+    public $task;
 
     public function translateColors($symbol, $message){
     
@@ -67,7 +69,7 @@ class Main extends PluginBase{
         $this->getCommand("sendmessage")->setExecutor(new Commands\SendMessage($this));
         $this->getCommand("broadcaster")->setExecutor(new Commands\Commands($this));
         $time = intval($this->cfg["time"]) * 20;
-        $this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), $time);
+        $this->task = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), $time);
     }
     
 	public function broadcast($conf, $message){
