@@ -1,7 +1,7 @@
 name: Broadcaster
 main: Broadcaster\Main
-version: "1.14"
-api: [1.9.0]
+version: "1.15"
+api: [1.11.0]
 load: STARTUP
 author: EvolSoft
 description: Broadcast Plugin
