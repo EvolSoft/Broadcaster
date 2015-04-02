@@ -5,7 +5,7 @@ api: [1.11.0]
 load: STARTUP
 author: EvolSoft
 description: Broadcast Plugin
-website: https://www.evolsoft.tk
+website: http://www.evolsoft.tk
 
 commands:
  broadcaster:
