@@ -10,7 +10,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP Alpha_1.4 API 1.9.0
+PocketMine-MP Alpha_1.4 API 1.11.0
 
 ## Overview
 
