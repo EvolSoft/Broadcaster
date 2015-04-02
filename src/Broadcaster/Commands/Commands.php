@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Broadcaster (v1.14) by EvolSoft
+ * Broadcaster (v1.15) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 27/12/2014 01:49 PM (UTC)
- * Copyright & License: (C) 2014 EvolSoft
+ * Date: 02/04/2015 02:56 PM (UTC)
+ * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -22,6 +22,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 
 use Broadcaster\Main;
+use Broadcaster\Task;
 
 class Commands extends PluginBase implements CommandExecutor{
 	
@@ -38,6 +39,10 @@ class Commands extends PluginBase implements CommandExecutor{
     			   		if($args[0]=="reload"){
     			   			if($sender->hasPermission("broadcaster.reload")) {
     			   				$this->plugin->reloadConfig();
+    			   				$this->cfg = $this->plugin->getConfig()->getAll();
+    			   				$time = intval($this->cfg["time"]) * 20;
+    			   				$this->plugin->task->remove();
+    			   				$this->plugin->task = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this->plugin), $time);
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&aConfiguration Reloaded."));
     			   				return true;
     			   			}
