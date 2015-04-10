@@ -21,7 +21,7 @@ PocketMine-MP Alpha_1.4 API 1.11.0
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
 You can set custom automatic messages and you can also send messages with /sm command.<br>
-You can also customize prefix, suffix and interval. (read documentation)
+You can also customize colors (only from MCPE v0.11.0), prefixes, suffixes and interval. (read documentation)
 
 **Commands:**
 
@@ -33,6 +33,8 @@ You can also customize prefix, suffix and interval. (read documentation)
 *- Bug fix (if bugs will be found)*
 
 ## Documentation
+
+**Text format (Available on PocketMine console and on MCPE v0.11.0 and later):**
 
 **Colors:**
 
