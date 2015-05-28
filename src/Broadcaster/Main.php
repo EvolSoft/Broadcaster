@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Broadcaster (v1.15) by EvolSoft
+ * Broadcaster (v1.16) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 02/04/2015 02:54 PM (UTC)
+ * Date: 28/05/2015 01:23 PM (UTC)
  * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
@@ -23,7 +23,7 @@ class Main extends PluginBase{
 	
 	//About Plugin Const
 	const PRODUCER = "EvolSoft";
-	const VERSION = "1.15";
+	const VERSION = "1.16";
 	const MAIN_WEBSITE = "http://www.evolsoft.tk";
 	//Other Const
 	//Prefix
@@ -66,13 +66,17 @@ class Main extends PluginBase{
 	    @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->cfg = $this->getConfig()->getAll();
-        $this->getCommand("sendmessage")->setExecutor(new Commands\SendMessage($this));
         $this->getCommand("broadcaster")->setExecutor(new Commands\Commands($this));
+        $this->getCommand("sendmessage")->setExecutor(new Commands\SendMessage($this));
+        $this->getCommand("sendpopup")->setExecutor(new Commands\SendPopup($this));
         $time = intval($this->cfg["time"]) * 20;
-        $this->task = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this), $time);
+        $this->task = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\Task($this), $time);
+        $this->ptask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\PopupTask($this), $time);
     }
     
 	public function broadcast($conf, $message){
+		$message = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $message);
+		$message = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $message);
 		$message = str_replace("{PREFIX}", $conf["prefix"], $message);
 		$message = str_replace("{SUFFIX}", $conf["suffix"], $message);
 		$message = str_replace("{TIME}", date($conf["datetime-format"]), $message);
@@ -82,6 +86,8 @@ class Main extends PluginBase{
 	public function messagebyPlayer(Player $player, $conf, $message){
 	    $format = $conf["sendmessage-format"];
 		$format = str_replace("{MESSAGE}", $message, $format);
+		$format = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $format);
+		$format = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $format);
 		$format = str_replace("{PREFIX}", $conf["prefix"], $format);
 		$format = str_replace("{SENDER}", $player->getName(), $format);
 		$format = str_replace("{SUFFIX}", $conf["suffix"], $format);
@@ -92,6 +98,41 @@ class Main extends PluginBase{
 	public function messagebyConsole(CommandSender $player, $conf, $message){
 		$format = $conf["sendmessage-format"];
 		$format = str_replace("{MESSAGE}", $message, $format);
+		$format = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $format);
+		$format = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $format);
+		$format = str_replace("{PREFIX}", $conf["prefix"], $format);
+		$format = str_replace("{SENDER}", $player->getName(), $format);
+		$format = str_replace("{SUFFIX}", $conf["suffix"], $format);
+		$format = str_replace("{TIME}", date($conf["datetime-format"]), $format);
+		return $format;
+	}
+	
+	public function broadcastPopup($conf, $message){
+		$message = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $message);
+		$message = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $message);
+		$message = str_replace("{PREFIX}", $conf["prefix"], $message);
+		$message = str_replace("{SUFFIX}", $conf["suffix"], $message);
+		$message = str_replace("{TIME}", date($conf["datetime-format"]), $message);
+		return $message;
+	}
+	
+	public function popupbyPlayer(Player $player, $conf, $message){
+		$format = $conf["sendmessage-format"];
+		$format = str_replace("{MESSAGE}", $message, $format);
+		$format = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $format);
+		$format = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $format);
+		$format = str_replace("{PREFIX}", $conf["prefix"], $format);
+		$format = str_replace("{SENDER}", $player->getName(), $format);
+		$format = str_replace("{SUFFIX}", $conf["suffix"], $format);
+		$format = str_replace("{TIME}", date($conf["datetime-format"]), $format);
+		return $format;
+	}
+	
+	public function popupbyConsole(CommandSender $player, $conf, $message){
+		$format = $conf["sendpopup-format"];
+		$format = str_replace("{MESSAGE}", $message, $format);
+		$format = str_replace("{MAXPLAYERS}", $this->getServer()->getMaxPlayers(), $format);
+		$format = str_replace("{TOTALPLAYERS}", count($this->getServer()->getOnlinePlayers()), $format);
 		$format = str_replace("{PREFIX}", $conf["prefix"], $format);
 		$format = str_replace("{SENDER}", $player->getName(), $format);
 		$format = str_replace("{SUFFIX}", $conf["suffix"], $format);
