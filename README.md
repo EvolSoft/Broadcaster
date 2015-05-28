@@ -10,7 +10,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP Alpha_1.4 API 1.11.0
+PocketMine-MP Alpha_1.5 API 1.12.0
 
 ## Overview
 
@@ -20,13 +20,14 @@ PocketMine-MP Alpha_1.4 API 1.11.0
 
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
-You can set custom automatic messages and you can also send messages with /sm command.<br>
-You can also customize colors (only from MCPE v0.11.0), prefixes, suffixes and interval. (read documentation)
+You can set custom automatic messages and you can also send messages with /sm and send popups with /sp commands.<br>
+You can also customize colors (only from MCPE v0.11.0), prefixes, suffixes and intervals. (read documentation)
 
 **Commands:**
 
 <dd><i><b>/broadcaster</b> - Broadcaster commands</i></dd>
-<dd><i><b>/sendmessage</b> - Send message to specified player (* for all players)</i></dd>
+<dd><i><b>/sendmessage</b> - Send message to the specified player (* for all players)</i></dd>
+<dd><i><b>/sendpopup</b> - Send popup to the specified player (* for all players)</i></dd>
 <br>
 **To-Do:**
 <br><br>
@@ -68,12 +69,16 @@ Reset ("&r");<br>
 
 ```yaml
 ---
-#Available Tags (broadcast messages):
+#Available Tags (broadcast messages/popups):
+# - {MAXPLAYERS}: Show the maximum number of players supported by the server
+# - {TOTALPLAYERS}: Show the number of all online players
 # - {PREFIX}: Show prefix
 # - {SUFFIX}: Show suffix
 # - {TIME}: Show current time
-#Available Tags (sendmessage format):
+#Available Tags (sendmessage/sendpopup format):
 # - {MESSAGE}: Show message
+# - {MAXPLAYERS}: Show the maximum number of players supported by the server
+# - {TOTALPLAYERS}: Show the number of all online players
 # - {PREFIX}: Show prefix
 # - {SENDER}: Show sender name
 # - {SUFFIX}: Show suffix
@@ -85,23 +90,35 @@ suffix: "[A]"
 #Broadcast interval (in seconds)
 time: 15
 #Command /sm output format
-sendmessage-format: "[{TIME}] [{PREFIX}] {SUFFIX} {SENDER}> {MESSAGE}"
+sendmessage-format: "&e[{TIME}] &b[{PREFIX}] {SUFFIX} &a{SENDER}&e>&f {MESSAGE}"
 #Date\Time format (replaced in {TIME}). For format codes read http://php.net/manual/en/datetime.formats.php
 datetime-format: "H:i:s"
 #Enable auto broadcast
 broadcast-enabled: true
 #Broadcast messages (you can set as many as you want)
 messages:
-- "[{TIME}] [{PREFIX}] 1st message"
-- "[{TIME}] [{PREFIX}] 2nd message"
-- "[{TIME}] [{PREFIX}] 3rd message"
-...
+ - "&e[{TIME}] &b[{PREFIX}]&f 1st message"
+ - "&e[{TIME}] &b[{PREFIX}]&f 2nd message"
+ - "&e[{TIME}] &b[{PREFIX}]&f 3rd message"
+#Popup broadcast interval (in seconds)
+popup-time: 15
+#Popup duration (in seconds)
+popup-duration: 5
+#Command /sp output format
+sendpopup-format: "&a{SENDER}&e>>&f {MESSAGE}"
+#Enable auto popup broadcast
+popup-broadcast-enabled: true
+popups:
+ - "&aWelcome to your server"
+ - "&d{TOTALPLAYERS} &eof &d{MAXPLAYERS} &eonline"
+ - "&bCurrent Time: &a{TIME}"
 ```
 
 **Commands:**
 
 <dd><b><i>/broadcaster</b> - Broadcaster commands (aliases: [bc, broadcast])</i></dd>
 <dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
+<dd><i><b>/sendpopup &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send popup to player (aliases: [sp, spop])</i></dd>
 <br>
 **Permissions:**
 <br><br>
@@ -109,3 +126,4 @@ messages:
 - <dd><i><b>broadcaster.info</b> - Allows player to read info about Broadcaster.</i>
 - <dd><i><b>broadcaster.reload</b> - Allows player to reload Broadcaster.</i>
 - <dd><i><b>broadcaster.sendmessage</b> - Allows sending messages to players with /sendmessage command.</i>
+- <dd><i><b>broadcaster.sendpopup</b> - Allows sending popups to players with /sendpopup command.</i>
