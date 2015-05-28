@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Broadcaster (v1.15) by EvolSoft
+ * Broadcaster (v1.16) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
- * Date: 02/04/2015 02:56 PM (UTC)
+ * Date: 28/05/2015 02:46 PM (UTC)
  * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
@@ -22,7 +22,9 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 
 use Broadcaster\Main;
-use Broadcaster\Task;
+use Broadcaster\Tasks\Task;
+use Broadcaster\Tasks\PopupTask;
+use Broadcaster\Tasks\Broadcaster\Tasks;
 
 class Commands extends PluginBase implements CommandExecutor{
 	
@@ -42,7 +44,9 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$this->cfg = $this->plugin->getConfig()->getAll();
     			   				$time = intval($this->cfg["time"]) * 20;
     			   				$this->plugin->task->remove();
+    			   				$this->plugin->ptask->remove();
     			   				$this->plugin->task = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this->plugin), $time);
+    			   				$this->plugin->ptask = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PopupTask($this->plugin), $time);
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&aConfiguration Reloaded."));
     			   				return true;
     			   			}
@@ -78,7 +82,8 @@ class Commands extends PluginBase implements CommandExecutor{
     			   			$sender->sendMessage($this->plugin->translateColors("&", "&2- &9Available Commands &2-"));
     			   			$sender->sendMessage($this->plugin->translateColors("&", "&9/bc info &2- &9Show info about this plugin"));
     			   			$sender->sendMessage($this->plugin->translateColors("&", "&9/bc reload &2- &9Reload the config"));
-    			   			$sender->sendMessage($this->plugin->translateColors("&", "&9/sendmessage &2- &9Send message to specified player (* for all players)"));
+    			   			$sender->sendMessage($this->plugin->translateColors("&", "&9/sendmessage &2- &9Send message to the specified player (* for all players)"));
+    			   			$sender->sendMessage($this->plugin->translateColors("&", "&9/sendpopup &2- &9Send popup to the specified player (* for all players)"));
     			   			break;
     			   		}else{
     			   			$sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
