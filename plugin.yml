@@ -1,7 +1,7 @@
 name: Broadcaster
 main: Broadcaster\Main
-version: "1.15"
-api: [1.11.0]
+version: "1.16"
+api: [1.12.0]
 load: STARTUP
 author: EvolSoft
 description: Broadcast Plugin
@@ -14,8 +14,12 @@ commands:
   permission: broadcaster
  sendmessage:
   aliases: [sm, smsg]
-  description: Send message to specified player (* for all players)
+  description: Send a message to the specified player (* for all players)
   permission: broadcaster.sendmessage
+ sendpopup:
+  aliases: [sp, spop]
+  description: Send a popup to the specified player (* for all players)
+  permission: broadcaster.sendpopup
 
 permissions:
  broadcaster:
@@ -31,3 +35,6 @@ permissions:
    broadcaster.sendmessage:
     default: op
     description: Allows sending messages to players with /sendmessage command.
+   broadcaster.sendpopup:
+    default: op
+    description: Allows sending popups to players with /sendpopup command.
