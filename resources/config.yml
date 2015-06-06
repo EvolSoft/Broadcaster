@@ -2,11 +2,19 @@
 prefix: "Broadcaster"
 suffix: "[A]"
 time: 15
-sendmessage-format: "[{TIME}] [{PREFIX}] {SUFFIX} {SENDER}> {MESSAGE}"
+sendmessage-format: "&e[{TIME}] &b[{PREFIX}] {SUFFIX} &a{SENDER}&e>&f {MESSAGE}"
 datetime-format: "H:i:s"
 broadcast-enabled: true
 messages:
- - "[{TIME}] [{PREFIX}] 1st message"
- - "[{TIME}] [{PREFIX}] 2nd message"
- - "[{TIME}] [{PREFIX}] 3rd message"
+ - "&e[{TIME}] &b[{PREFIX}]&f 1st message"
+ - "&e[{TIME}] &b[{PREFIX}]&f 2nd message"
+ - "&e[{TIME}] &b[{PREFIX}]&f 3rd message"
+popup-time: 15
+popup-duration: 5
+sendpopup-format: "&a{SENDER}&e>>&f {MESSAGE}"
+popup-broadcast-enabled: true
+popups:
+ - "&aWelcome to your server"
+ - "&d{TOTALPLAYERS} &eof &d{MAXPLAYERS} &eonline"
+ - "&bCurrent Time: &a{TIME}"
 ...
