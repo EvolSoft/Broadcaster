@@ -70,8 +70,9 @@ class Main extends PluginBase{
         $this->getCommand("sendmessage")->setExecutor(new Commands\SendMessage($this));
         $this->getCommand("sendpopup")->setExecutor(new Commands\SendPopup($this));
         $time = intval($this->cfg["time"]) * 20;
+        $ptime = intval($this->cfg["popup-time"]) * 20;
         $this->task = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\Task($this), $time);
-        $this->ptask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\PopupTask($this), $time);
+        $this->ptask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\PopupTask($this), $ptime);
     }
     
 	public function broadcast($conf, $message){
