@@ -43,10 +43,11 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				$this->plugin->reloadConfig();
     			   				$this->cfg = $this->plugin->getConfig()->getAll();
     			   				$time = intval($this->cfg["time"]) * 20;
+    			   				$ptime = intval($this->cfg["popup-time"]) * 20;
     			   				$this->plugin->task->remove();
     			   				$this->plugin->ptask->remove();
     			   				$this->plugin->task = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new Task($this->plugin), $time);
-    			   				$this->plugin->ptask = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PopupTask($this->plugin), $time);
+    			   				$this->plugin->ptask = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PopupTask($this->plugin), $ptime);
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&aConfiguration Reloaded."));
     			   				return true;
     			   			}
