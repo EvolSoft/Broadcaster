@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Broadcaster (v1.16) by EvolSoft
- * Developer: EvolSoft (Flavius12)
- * Website: http://www.evolsoft.tk
+ * Broadcaster (v1.16) by EvolSoft and Revival PMMP
+ * Developer: EvolSoft (Flavius12) and Revival PMMP
+ * Website: http://revivalpmmp.gq
  * Date: 28/05/2015 01:23 PM (UTC)
  * Copyright & License: (C) 2014-2015 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
@@ -22,9 +22,9 @@ use pocketmine\utils\TextFormat;
 class Main extends PluginBase{
 	
 	//About Plugin Const
-	const PRODUCER = "EvolSoft";
+	const PRODUCER = "EvolSoft, now RevivalPMMP";
 	const VERSION = "1.16";
-	const MAIN_WEBSITE = "http://www.evolsoft.tk";
+	const MAIN_WEBSITE = "http://revivalpmmp.gq";
 	//Other Const
 	//Prefix
 	const PREFIX = "&9[&eBroadcaster&9] ";

@@ -1,22 +1,21 @@
 ![start2](https://cloud.githubusercontent.com/assets/10303538/6315586/9463fa5c-ba06-11e4-8f30-ce7d8219c27d.png)
+[![Poggit-CI](https://poggit.pmmp.io/ci.badge/RevivalPMMP/Broadcaster/Broadcaster)](https://poggit.pmmp.io/ci/RevivalPMMP/Broadcaster/Broadcaster)
 
 # Broadcaster
 
 Advanced Broadcasting plugin for PocketMine-MP
-
-## Category
-
-PocketMine-MP plugins
+Being Revived by Revival PMMP - It was inactive, now it will be updated and usable in new Pocketmine versions.
 
 ## Requirements
 
-PocketMine-MP Alpha_1.5 API 1.12.0
-
+PocketMine-MP 1.6.2 API 3.0.0-ALPHA2
 ## Overview
 
 **Broadcaster** is an Advanced Broadcasting plugin.
 
 **EvolSoft Website:** http://www.evolsoft.tk
+
+**Revival PMMP Website:** http://revivalpmmp.gq
 
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
