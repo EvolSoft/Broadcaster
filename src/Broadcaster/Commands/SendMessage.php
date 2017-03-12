@@ -5,7 +5,7 @@
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 28/05/2015 02:37 PM (UTC)
- * Copyright & License: (C) 2014-2015 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -30,14 +30,13 @@ class SendMessage extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "sendmessage":
     				$this->temp = $this->plugin->getConfig()->getAll();
     				if($sender->hasPermission("broadcaster.sendmessage")){
     					if(isset($args[0]) && isset($args[1])){
     						//Send message to all players
-    						if($args[0]=="*"){
+    						if($args[0] === "*"){
     							//Verify is $sender is Console or Player
     							if($sender instanceof CommandSender){
     								foreach($this->plugin->getServer()->getOnlinePlayers() as $onlineplayers){
@@ -75,4 +74,4 @@ class SendMessage extends PluginBase implements CommandExecutor{
     }
     
 }
-    ?>
+    

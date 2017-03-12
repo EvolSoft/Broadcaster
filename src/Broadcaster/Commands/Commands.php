@@ -5,7 +5,7 @@
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 28/05/2015 02:46 PM (UTC)
- * Copyright & License: (C) 2014-2015 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -33,12 +33,11 @@ class Commands extends PluginBase implements CommandExecutor{
     }
     
     public function onCommand(CommandSender $sender, Command $cmd, $label, array $args) {
-    	$fcmd = strtolower($cmd->getName());
-    	switch($fcmd){
+    	switch(strtolower($cmd->getName())){
     			case "broadcaster":
     				if(isset($args[0])){
     			   		$args[0] = strtolower($args[0]);
-    			   		if($args[0]=="reload"){
+    			   		if($args[0] === "reload"){
     			   			if($sender->hasPermission("broadcaster.reload")) {
     			   				$this->plugin->reloadConfig();
     			   				$this->cfg = $this->plugin->getConfig()->getAll();
@@ -56,7 +55,7 @@ class Commands extends PluginBase implements CommandExecutor{
     			   				return true;
     			   			}
     			   		}
-    			   		elseif($args[0]=="info"){
+    			   		elseif($args[0] === "info"){
     			   			if($sender->hasPermission("broadcaster.info")) {
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&2BroadCaster &9v" . Main::VERSION . " &2developed by&9 " . Main::PRODUCER));
     			   				$sender->sendMessage($this->plugin->translateColors("&", Main::PREFIX . "&2Website &9" . Main::MAIN_WEBSITE));
@@ -97,4 +96,4 @@ class Commands extends PluginBase implements CommandExecutor{
     }
     
 }
-    ?>
+    

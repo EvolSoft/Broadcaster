@@ -1,12 +1,11 @@
 name: Broadcaster
 main: Broadcaster\Main
 version: "1.16"
-api: [1.12.0]
+api: [2.0.0, 3.0.0-ALPHA1, 3.0.0-ALPHA2, 3.0.0-ALPHA3, 3.0.0-ALPHA4]
 load: STARTUP
 author: EvolSoft
-description: Broadcast Plugin
+description: Advanced Broadcasting Plugin
 website: http://www.evolsoft.tk
-
 commands:
  broadcaster:
   aliases: [bc, broadcast]
@@ -20,7 +19,6 @@ commands:
   aliases: [sp, spop]
   description: Send a popup to the specified player (* for all players)
   permission: broadcaster.sendpopup
-
 permissions:
  broadcaster:
   default: op

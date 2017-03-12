@@ -10,7 +10,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP Alpha_1.5 API 1.12.0
+[PocketMine-MP](https://github.com/pmmp/PocketMine-MP) API 2.0.0 - 3.0.0-ALPHA4
 
 ## Overview
 
@@ -21,7 +21,7 @@ PocketMine-MP Alpha_1.5 API 1.12.0
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
 You can set custom automatic messages and you can also send messages with /sm and send popups with /sp commands.<br>
-You can also customize colors (only from MCPE v0.11.0), prefixes, suffixes and intervals. (read documentation)
+You can also customize colors, prefixes, suffixes and intervals. You can use the & sign instead of §.
 
 **Commands:**
 
@@ -29,41 +29,10 @@ You can also customize colors (only from MCPE v0.11.0), prefixes, suffixes and i
 <dd><i><b>/sendmessage</b> - Send message to the specified player (* for all players)</i></dd>
 <dd><i><b>/sendpopup</b> - Send popup to the specified player (* for all players)</i></dd>
 <br>
+
 **To-Do:**
 <br><br>
 *- Bug fix (if bugs will be found)*
-
-## Documentation
-
-**Text format (Available on PocketMine console and on MCPE v0.11.0 and later):**
-
-**Colors:**
-
-Black ("&0");<br>
-Dark Blue ("&1");<br>
-Dark Green ("&2");<br>
-Dark Aqua ("&3");<br>
-Dark Red ("&4");<br>
-Dark Purple ("&5");<br>
-Gold ("&6");<br>
-Gray ("&7");<br>
-Dark Gray ("&8");<br>
-Blue ("&9");<br>
-Green ("&a");<br>
-Aqua ("&b");<br>
-Red ("&c");<br>
-Light Purple ("&d");<br>
-Yellow ("&e");<br>
-White ("&f");<br>
-
-**Special:**
-
-Obfuscated ("&k");<br>
-Bold ("&l");<br>
-Strikethrough ("&m");<br>
-Underline ("&n");<br>
-Italic ("&o");<br>
-Reset ("&r");<br>
 
 **Configuration (config.yml):**
 

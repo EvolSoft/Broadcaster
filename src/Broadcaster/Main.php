@@ -5,7 +5,7 @@
  * Developer: EvolSoft (Flavius12)
  * Website: http://www.evolsoft.tk
  * Date: 28/05/2015 01:23 PM (UTC)
- * Copyright & License: (C) 2014-2015 EvolSoft
+ * Copyright & License: (C) 2014-2017 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -34,7 +34,6 @@ class Main extends PluginBase{
     public $task;
 
     public function translateColors($symbol, $message){
-    
     	$message = str_replace($symbol."0", TextFormat::BLACK, $message);
     	$message = str_replace($symbol."1", TextFormat::DARK_BLUE, $message);
     	$message = str_replace($symbol."2", TextFormat::DARK_GREEN, $message);
@@ -147,4 +146,4 @@ class Main extends PluginBase{
 	}
 	
 }
-?>
+
