@@ -10,7 +10,7 @@ PocketMine-MP plugins
 
 ## Requirements
 
-[PocketMine-MP](https://github.com/pmmp/PocketMine-MP) API 2.0.0 - 3.0.0-ALPHA4
+[PocketMine-MP](https://github.com/pmmp/PocketMine-MP) API 3.0.0-ALPHA7
 
 ## Overview
 
