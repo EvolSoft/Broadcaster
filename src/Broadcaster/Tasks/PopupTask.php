@@ -25,7 +25,7 @@ class PopupTask extends PluginTask {
 		$this->length = -1;
     }
 
-    public function onRun($currentTick){
+    public function onRun(int $currentTick){
     	$this->plugin = $this->getOwner();
     	$this->cfg = $this->plugin->getConfig()->getAll();
     	if($this->cfg["popup-broadcast-enabled"] === true){
