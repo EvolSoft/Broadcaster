@@ -1,6 +1,6 @@
 name: Broadcaster
 main: Broadcaster\Main
-version: "1.2"
+version: "1.17"
 api: [3.0.0-ALPHA7]
 load: STARTUP
 author: EvolSoft
