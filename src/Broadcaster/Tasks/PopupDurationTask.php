@@ -27,7 +27,7 @@ class PopupDurationTask extends PluginTask {
         $this->current = 0;
     }
     
-    public function onRun($tick){
+    public function onRun(int $tick){
     	$this->plugin = $this->getOwner();
     	if($this->current <= $this->duration){
     		if($this->player instanceof Player){
