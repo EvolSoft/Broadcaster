@@ -1,7 +1,7 @@
 name: Broadcaster
 main: Broadcaster\Main
 version: "1.17"
-api: [3.0.0-ALPHA7]
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8]
 load: STARTUP
 author: EvolSoft
 description: Advanced Broadcasting Plugin
