@@ -1,42 +1,37 @@
 <?php
 
 /*
- * Broadcaster (v1.16) by EvolSoft
+ * Broadcaster (v1.2) by EvolSoft
  * Developer: EvolSoft (Flavius12)
- * Website: http://www.evolsoft.tk
- * Date: 28/05/2015 01:45 PM (UTC)
- * Copyright & License: (C) 2014-2017 EvolSoft
+ * Website: https://www.evolsoft.tk
+ * Date: 13/01/2018 04:01 PM (UTC)
+ * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
 namespace Broadcaster\Tasks;
 
-use pocketmine\Server;
 use pocketmine\scheduler\PluginTask;
-use pocketmine\utils\TextFormat;
 
-use Broadcaster\Main;
+use Broadcaster\Broadcaster;
 
 class PopupTask extends PluginTask {
-
-    public function __construct(Main $plugin){
+    
+    public function __construct(Broadcaster $plugin){
         parent::__construct($plugin);
-        $this->plugin = $plugin;
-		$this->length = -1;
+        $this->i = 0;
     }
-
+    
     public function onRun(int $currentTick){
-    	$this->plugin = $this->getOwner();
-    	$this->cfg = $this->plugin->getConfig()->getAll();
-    	if($this->cfg["popup-broadcast-enabled"] === true){
-    		$this->length = $this->length+1;
-    		$popups = $this->cfg["popups"];
-    		$popupkey = $this->length;
-    		$popup = $popups[$popupkey];
-    		if($this->length === count($popups)-1) $this->length = -1;
-    		$this->plugin->getServer()->getScheduler()->scheduleRepeatingTask(new PopupDurationTask($this->plugin, $this->plugin->broadcast($this->cfg, $popup), null, $this->cfg["popup-duration"]), 10);
-    	}
+        $this->plugin = $this->getOwner();
+        $messages = $this->plugin->cfg["popup-broadcast"]["messages"];
+        while($this->i < count($messages)){
+            $this->plugin->getServer()->getScheduler()->scheduleTask(new PopupDurationTask($this->plugin, $this->plugin->formatMessage($messages[$this->i]), null, $this->plugin->cfg["popup-broadcast"]["duration"]));
+            $this->i++;
+            break;
+        }
+        if($this->i == count($messages)){
+            $this->i = 0;
+        }
     }
-
 }
-

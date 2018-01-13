@@ -10,17 +10,17 @@ PocketMine-MP plugins
 
 ## Requirements
 
-[PocketMine-MP](https://github.com/pmmp/PocketMine-MP) API 3.0.0-ALPHA7
+PocketMine-MP 1.7dev API 3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10
 
 ## Overview
 
-**Broadcaster** is an Advanced Broadcasting plugin.
+**Broadcaster** is an advanced Broadcasting plugin for PocketMine-MP.
 
-**EvolSoft Website:** http://www.evolsoft.tk
+**EvolSoft Website:** https://www.evolsoft.tk
 
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
-You can set custom automatic messages and you can also send messages with /sm and send popups with /sp commands.<br>
+With Broadcaster you can set custom message/popup and title broadcasts. You can also send messages with /sm, send popups with /sp and send titles with /st commands.<br>
 You can also customize colors, prefixes, suffixes and intervals. You can use the & sign instead of §.
 
 **Commands:**
@@ -28,11 +28,14 @@ You can also customize colors, prefixes, suffixes and intervals. You can use the
 <dd><i><b>/broadcaster</b> - Broadcaster commands</i></dd>
 <dd><i><b>/sendmessage</b> - Send message to the specified player (* for all players)</i></dd>
 <dd><i><b>/sendpopup</b> - Send popup to the specified player (* for all players)</i></dd>
+<dd><i><b>/sendtitle</b> - Send title to the specified player (* for all players)</i></dd>
 <br>
 
-**To-Do:**
-<br><br>
-*- Bug fix (if bugs will be found)*
+## Donate
+
+Support the development of this plugin with a small donation by clicking [:dollar: here](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=flavius.c.1999@gmail.com&lc=US&item_name=www.evolsoft.tk&no_note=0&cn=&curency_code=EUR&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted). Thank you :smile:
+
+## Documentation
 
 **Configuration (config.yml):**
 
@@ -86,13 +89,15 @@ popups:
 **Commands:**
 
 <dd><b><i>/broadcaster</b> - Broadcaster commands (aliases: [bc, broadcast])</i></dd>
-<dd><i><b>/sendmessage &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send message to player (aliases: [sm, smsg])</i></dd>
-<dd><i><b>/sendpopup &lt;to player (* for all players)&gt; &lt;message&gt;</b> - Send popup to player (aliases: [sp, spop])</i></dd>
-<br>
+<dd><i><b>/sendmessage &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send message to player(s) (aliases: [sm, smsg])</i></dd>
+<dd><i><b>/sendpopup &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send popup to player(s) (aliases: [sp, spop])</i></dd>
+<dd><i><b>/sendtitle &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send title to player(s) (aliases: [st, stl])</i></dd>
+
 **Permissions:**
-<br><br>
-- <dd><i><b>broadcaster.*</b> - Broadcaster commands permissions.</i>
-- <dd><i><b>broadcaster.info</b> - Allows player to read info about Broadcaster.</i>
-- <dd><i><b>broadcaster.reload</b> - Allows player to reload Broadcaster.</i>
-- <dd><i><b>broadcaster.sendmessage</b> - Allows sending messages to players with /sendmessage command.</i>
-- <dd><i><b>broadcaster.sendpopup</b> - Allows sending popups to players with /sendpopup command.</i>
+
+- <dd><i><b>broadcaster.*</b> - Broadcaster permissions tree.</i>
+- <dd><i><b>broadcaster.info</b> - Let player read info about Broadcaster.</i>
+- <dd><i><b>broadcaster.reload</b> - Let player reload Broadcaster.</i>
+- <dd><i><b>broadcaster.sendmessage</b> - Let player send messages to players with /sendmessage command.</i>
+- <dd><i><b>broadcaster.sendpopup</b> - Let player send popups to players with /sendpopup command.</i>
+- <dd><i><b>broadcaster.sendpopup</b> - Let player send titles to players with /sendtitle command.</i>

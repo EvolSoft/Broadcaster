@@ -1,11 +1,11 @@
 <?php
 
 /*
- * Broadcaster (v1.16) by EvolSoft
+ * Broadcaster (v1.2) by EvolSoft
  * Developer: EvolSoft (Flavius12)
- * Website: http://www.evolsoft.tk
- * Date: 28/05/2015 01:48 PM (UTC)
- * Copyright & License: (C) 2014-2017 EvolSoft
+ * Website: https://www.evolsoft.tk
+ * Date: 13/01/2018 04:01 PM (UTC)
+ * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -14,35 +14,28 @@ namespace Broadcaster\Tasks;
 use pocketmine\Player;
 use pocketmine\scheduler\PluginTask;
 
-use Broadcaster\Main;
+use Broadcaster\Broadcaster;
 
 class PopupDurationTask extends PluginTask {
 	
-    public function __construct(Main $plugin, $message, $player = null, $duration){
-    	parent::__construct($plugin);
+    public function __construct(Broadcaster $plugin, $message, Player $player = null, $duration){
+        parent::__construct($plugin);
         $this->plugin = $plugin;
+    	$this->message = $message;
         $this->player = $player;
-        $this->message = $message;
         $this->duration = $duration;
-        $this->current = 0;
     }
     
     public function onRun(int $tick){
     	$this->plugin = $this->getOwner();
-    	if($this->current <= $this->duration){
-    		if($this->player instanceof Player){
-    			$this->message = str_replace("{PLAYER}", $this->player->getName(), $this->message);
-    			$this->player->sendPopup($this->plugin->translateColors("&", $this->message));
-    		}else{
-    			foreach($this->plugin->getServer()->getOnlinePlayers() as $players){
-    				$this->message = str_replace("{PLAYER}", "*", $this->message);
-    				$players->sendPopup($this->plugin->translateColors("&", $this->message));
-    			}
-    		}
-    	}else{
-    		$this->plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
+    	for($i = 0; $i < $this->duration * 10; $i++){
+    	    if($this->player){
+    	        $this->player->sendPopup($this->plugin->translateColors("&", $this->message));
+    	    }else{
+    	        $this->plugin->getServer()->broadcastPopup($this->plugin->translateColors("&", $this->message));
+    	    }
     	}
-    	$this->current += 1;
+    	$this->plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
     }
 }
 

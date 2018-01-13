@@ -1,15 +1,15 @@
 name: Broadcaster
-main: Broadcaster\Main
-version: "1.17"
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8]
+main: Broadcaster\Broadcaster
+version: 1.2
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
 load: STARTUP
 author: EvolSoft
-description: Advanced Broadcasting Plugin
-website: http://www.evolsoft.tk
+description: Advanced Broadcasting plugin
+website: https://www.evolsoft.tk
 commands:
  broadcaster:
   aliases: [bc, broadcast]
-  description: Broadcaster Commands.
+  description: Broadcaster commands.
   permission: broadcaster
  sendmessage:
   aliases: [sm, smsg]
@@ -19,20 +19,27 @@ commands:
   aliases: [sp, spop]
   description: Send a popup to the specified player (* for all players)
   permission: broadcaster.sendpopup
+ sendtitle:
+  aliases: [st, stl]
+  description: Send a title to the specified player (* for all players)
+  permission: broadcaster.sendtitle
 permissions:
  broadcaster:
   default: op
-  description: Broadcaster commands permissions.
+  description: Broadcaster permissions tree.
   children:
    broadcaster.info:
     default: op
-    description: Allows player to read info about Broadcaster.
+    description: Let player read info about Broadcaster.
    broadcaster.reload:
     default: op
-    description: Allows player to reload Broadcaster.
+    description: Let player reload Broadcaster.
    broadcaster.sendmessage:
     default: op
-    description: Allows sending messages to players with /sendmessage command.
+    description: Let player send messages to players with /sendmessage command.
    broadcaster.sendpopup:
     default: op
-    description: Allows sending popups to players with /sendpopup command.
+    description: Let player send popups to players with /sendpopup command.
+   broadcaster.sendtitle:
+    default: op
+    description: Let player send titles to players with /sendtitle command.
