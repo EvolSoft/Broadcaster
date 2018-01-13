@@ -41,49 +41,70 @@ Support the development of this plugin with a small donation by clicking [:dolla
 
 ```yaml
 ---
-#Available Tags (broadcast messages/popups):
+# Available tags for broadcast messages, popups and titles:
 # - {MAXPLAYERS}: Show the maximum number of players supported by the server
 # - {TOTALPLAYERS}: Show the number of all online players
 # - {PREFIX}: Show prefix
 # - {SUFFIX}: Show suffix
 # - {TIME}: Show current time
-#Available Tags (sendmessage/sendpopup format):
+# Available tags for /sendmessage, /sendpopup and /sendtitle format:
 # - {MESSAGE}: Show message
 # - {MAXPLAYERS}: Show the maximum number of players supported by the server
 # - {TOTALPLAYERS}: Show the number of all online players
 # - {PREFIX}: Show prefix
+# - {PLAYER}: Message receiver
 # - {SENDER}: Show sender name
 # - {SUFFIX}: Show suffix
 # - {TIME}: Show current time
-#Prefix
-prefix: "Broadcaster"
-#Suffix
+# Extra tag for titles:
+# - {SUBTITLE}: Add subtitle (the text after this tag will be the content of the subtitle) 
+# Prefix
+prefix: "&9[&eBroadcaster&9]"
+# Suffix
 suffix: "[A]"
-#Broadcast interval (in seconds)
-time: 15
-#Command /sm output format
-sendmessage-format: "&e[{TIME}] &b[{PREFIX}] {SUFFIX} &a{SENDER}&e>&f {MESSAGE}"
-#Date\Time format (replaced in {TIME}). For format codes read http://php.net/manual/en/datetime.formats.php
+# Date\Time format (replaced in {TIME}). For format codes read http://php.net/manual/en/datetime.formats.php
 datetime-format: "H:i:s"
-#Enable auto broadcast
-broadcast-enabled: true
-#Broadcast messages (you can set as many as you want)
-messages:
- - "&e[{TIME}] &b[{PREFIX}]&f 1st message"
- - "&e[{TIME}] &b[{PREFIX}]&f 2nd message"
- - "&e[{TIME}] &b[{PREFIX}]&f 3rd message"
-#Popup broadcast interval (in seconds)
-popup-time: 15
-#Popup duration (in seconds)
-popup-duration: 5
-#Command /sp output format
-sendpopup-format: "&a{SENDER}&e>>&f {MESSAGE}"
-#Enable auto popup broadcast
-popup-broadcast-enabled: true
-popups:
- - "&aWelcome to your server"
- - "&d{TOTALPLAYERS} &eof &d{MAXPLAYERS} &eonline"
- - "&bCurrent Time: &a{TIME}"
+# Message broadcast
+message-broadcast:
+ # Enable message broadcast
+ enabled: true
+ # Broadcast interval (in seconds)
+ time: 15
+ # Command /sendmessage format
+ command-format: "&e[{TIME}] {PREFIX} {SUFFIX} &a{SENDER}&e>&f {MESSAGE}"
+ # Broadcast messages
+ messages:
+  - "&e[{TIME}] {PREFIX}&f 1st message"
+  - "&e[{TIME}] {PREFIX}&f 2nd message"
+  - "&e[{TIME}] {PREFIX}&f 3rd message"
+# Popup broadcast
+popup-broadcast:
+ # Enable popup broadcast
+ enabled: true
+ # Popup broadcast interval (in seconds)
+ time: 15
+ # Popup duration (in seconds)
+ duration: 5
+ # Command /sendpopup format
+ command-format: "&a{SENDER}&e>>&f {MESSAGE}"
+ # Popup broadcast messages
+ messages:
+  - "&aWelcome to your server"
+  - "&d{TOTALPLAYERS} &eof &d{MAXPLAYERS} &eonline"
+  - "&bCurrent Time: &a{TIME}"
+# Title broadcast
+title-broadcast:
+ # Enable title broadcast
+ enabled: true
+ # Title broadcast interval
+ time: 30
+ # Command /sendtitle format
+ command-format: "&d{MESSAGE}"
+ # Title broadcast messages
+ messages:
+  - "&aWelcome to your server!{SUBTITLE}&bGood game!"
+  - "&eHello player!"
+...
 ```
 
 **Commands:**
@@ -92,7 +113,7 @@ popups:
 <dd><i><b>/sendmessage &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send message to player(s) (aliases: [sm, smsg])</i></dd>
 <dd><i><b>/sendpopup &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send popup to player(s) (aliases: [sp, spop])</i></dd>
 <dd><i><b>/sendtitle &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send title to player(s) (aliases: [st, stl])</i></dd>
-
+<br>
 **Permissions:**
 
 - <dd><i><b>broadcaster.*</b> - Broadcaster permissions tree.</i>
@@ -101,3 +122,27 @@ popups:
 - <dd><i><b>broadcaster.sendmessage</b> - Let player send messages to players with /sendmessage command.</i>
 - <dd><i><b>broadcaster.sendpopup</b> - Let player send popups to players with /sendpopup command.</i>
 - <dd><i><b>broadcaster.sendpopup</b> - Let player send titles to players with /sendtitle command.</i>
+
+## API
+
+Almost all our plugins have API access to widely extend their features.
+
+To access Broadcaster API:<br>
+*1. Define the plugin dependency in plugin.yml (you can check if Broadcaster is installed in different ways):*
+
+```yaml
+depend: [Broadcaster]
+```
+
+*2. Include Broadcaster API in your plugin code:*
+
+```php
+//ChatCensor API
+use Broadcaster\Broadcaster;
+```
+
+*3. Access the API by doing:*
+
+```php
+Broadcaster::getAPI()
+```
