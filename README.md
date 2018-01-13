@@ -137,7 +137,7 @@ depend: [Broadcaster]
 *2. Include Broadcaster API in your plugin code:*
 
 ```php
-//ChatCensor API
+//Broadcaster API
 use Broadcaster\Broadcaster;
 ```
 
