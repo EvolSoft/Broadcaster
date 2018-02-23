@@ -105,7 +105,7 @@ title-broadcast:
 <dd><i><b>/sendmessage &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send message to player(s) (aliases: [sm, smsg])</i></dd>
 <dd><i><b>/sendpopup &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send popup to player(s) (aliases: [sp, spop])</i></dd>
 <dd><i><b>/sendtitle &lt;player (* for all players)&gt; &lt;message&gt;</b> - Send title to player(s) (aliases: [st, stl])</i></dd>
-<br>
+
 **Permissions:**
 
 - <dd><i><b>broadcaster.*</b> - Broadcaster permissions tree.</i>
