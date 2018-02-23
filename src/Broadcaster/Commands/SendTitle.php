@@ -1,14 +1,13 @@
 <?php
 
 /*
- * Broadcaster (v1.2) by EvolSoft
+ * Broadcaster (v1.3) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
- * Date: 13/01/2018 04:01 PM (UTC)
+ * Date: 01/02/2018 01:07 PM (UTC)
  * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
-
 
 namespace Broadcaster\Commands;
 
@@ -21,6 +20,9 @@ use Broadcaster\Broadcaster;
 
 class SendTitle extends PluginBase implements CommandExecutor {
     
+    /** @var Broadcaster */
+    private $plugin;
+    
     public function __construct(Broadcaster $plugin){
         $this->plugin = $plugin;
     }
@@ -28,14 +30,10 @@ class SendTitle extends PluginBase implements CommandExecutor {
     public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool {
         if($sender->hasPermission("broadcaster.sendtitle")){
             if(isset($args[0]) && isset($args[1])){
-                //Send message to all players
                 if($args[0] == "*"){
-                    foreach($this->plugin->getServer()->getOnlinePlayers() as $player){
-                        $this->plugin->broadcast($player, Broadcaster::TYPE_TITLE, $sender->getName(), $this->plugin->getMessagefromArray($args));
-                    }
-                }else if($this->plugin->getServer()->getPlayerExact($args[0])){
-                    $player = $this->plugin->getServer()->getPlayerExact($args[0]);
-                    $this->plugin->broadcast($player, Broadcaster::TYPE_TITLE, $sender->getName(), $this->plugin->getMessagefromArray($args));
+                    $this->plugin->broadcast(Broadcaster::TYPE_TITLE, $sender->getName(), $this->plugin->getMessagefromArray($args));
+                }else if(($player = $this->plugin->getServer()->getPlayerExact($args[0]))){
+                    $this->plugin->broadcast(Broadcaster::TYPE_TITLE, $sender->getName(), $this->plugin->getMessagefromArray($args), $player);
                 }else{
                     $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&cPlayer not found"));
                 }

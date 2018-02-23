@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Broadcaster (v1.2) by EvolSoft
+ * Broadcaster (v1.3) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
  * Date: 13/01/2018 04:01 PM (UTC)
@@ -17,25 +17,32 @@ use pocketmine\scheduler\PluginTask;
 use Broadcaster\Broadcaster;
 
 class PopupDurationTask extends PluginTask {
+    
+    /** @var string */
+    private $message;
+    
+    /** @var Player */
+    private $player;
+    
+    /** @var int */
+    private $duration;
 	
     public function __construct(Broadcaster $plugin, $message, Player $player = null, $duration){
         parent::__construct($plugin);
-        $this->plugin = $plugin;
     	$this->message = $message;
         $this->player = $player;
         $this->duration = $duration;
     }
     
     public function onRun(int $tick){
-    	$this->plugin = $this->getOwner();
+    	$plugin = $this->getOwner();
     	for($i = 0; $i < $this->duration * 10; $i++){
     	    if($this->player){
-    	        $this->player->sendPopup($this->plugin->translateColors("&", $this->message));
+    	        $this->player->sendPopup($plugin->translateColors("&", $this->message));
     	    }else{
-    	        $this->plugin->getServer()->broadcastPopup($this->plugin->translateColors("&", $this->message));
+    	        $plugin->getServer()->broadcastPopup($plugin->translateColors("&", $this->message));
     	    }
     	}
-    	$this->plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
+    	$plugin->getServer()->getScheduler()->cancelTask($this->getTaskId());
     }
 }
-

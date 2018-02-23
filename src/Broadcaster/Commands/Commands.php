@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Broadcaster (v1.2) by EvolSoft
+ * Broadcaster (v1.4) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
- * Date: 13/01/2018 04:01 PM (UTC)
+ * Date: 13/02/2018 06:57 PM (UTC)
  * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
@@ -19,6 +19,12 @@ use pocketmine\plugin\PluginBase;
 use Broadcaster\Broadcaster;
 
 class Commands extends PluginBase implements CommandExecutor {
+    
+    /** @var Broadcaster */
+    private $plugin;
+    
+    /** @var int */
+    private $lstchk = 0;
 	
 	public function __construct(Broadcaster $plugin){
         $this->plugin = $plugin;
@@ -30,7 +36,7 @@ class Commands extends PluginBase implements CommandExecutor {
 	   		switch($args[0]){
 	   		    case "info":
 	   		        if($sender->hasPermission("broadcaster.info")){
-	   		            $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&2BroadCaster &9v" . $this->plugin->getDescription()->getVersion() . "&2 developed by &9EvolSoft"));
+	   		            $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&2Broadcaster &9v" . $this->plugin->getDescription()->getVersion() . "&2 developed by &9EvolSoft"));
 	   		            $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&2Website &9" . $this->plugin->getDescription()->getWebsite()));
 	   		            break;
 	   		        }
@@ -39,14 +45,9 @@ class Commands extends PluginBase implements CommandExecutor {
 	   		    case "help":
 	   		        goto help;
 	   		    case "reload":
-	   		        if($sender->hasPermission("broadcaster.reload")) {
-	   		            $this->plugin->reloadConfig();
-	   		            $this->plugin->cfg = $this->plugin->getConfig()->getAll();
-	   		            $this->plugin->mtask->remove();
-	   		            $this->plugin->ptask->remove();
-	   		            $this->plugin->ttask->remove();
-	   		            $this->plugin->initTasks();
-	   		            $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&aConfiguration Reloaded."));
+	   		        if($sender->hasPermission("broadcaster.reload")){
+	   		            $this->plugin->reload();
+	   		            $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&aConfiguration reloaded"));
 	   		            break;
 	   		        }
 	   		        $sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));

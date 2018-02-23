@@ -1,21 +1,21 @@
 <?php
 
 /*
- * Broadcaster (v1.2) by EvolSoft
+ * Broadcaster (v1.3) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
- * Date: 13/01/2018 04:00 PM (UTC)
+ * Date: 01/02/2018 01:09 PM (UTC)
  * Copyright & License: (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
 namespace Broadcaster;
 
-use Broadcaster\Tasks\PopupDurationTask;
+
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\TaskHandler;
+use pocketmine\utils\TextFormat;
 
 class Broadcaster extends PluginBase {
 
@@ -23,7 +23,7 @@ class Broadcaster extends PluginBase {
 	const PREFIX = "&9[&eBroadcaster&9] ";
 	
 	/** @var string */
-	const API_VERSION = "1.0";
+	const API_VERSION = "2.0";
 	
 	/** @var int */
 	const TYPE_MESSAGE = 0;
@@ -33,24 +33,25 @@ class Broadcaster extends PluginBase {
 	
 	/** @var int */
 	const TYPE_TITLE = 2;
-
-	/** @var array */
+    
+    /** @var TaskHandler */
+    private $mtask;
+    
+    /** @var TaskHandler */
+    private $ptask;
+    
+    /** @var TaskHandler */
+    private $ttask;
+    
+    /** @var array */
     public $cfg;
     
-    /** @var TaskHandler */
-    public $mtask;
-    
-    /** @var TaskHandler */
-    public $ptask;
-    
-    /** @var TaskHandler */
-    public $ttask;
-    
-    /** @var Broadcaster $instance */
+    /** @var Broadcaster */
     private static $instance = null;
 
     /**
      * Translate Minecraft colors
+     * 
      * @param string $symbol
      * @param string $message
      * 
@@ -115,8 +116,6 @@ class Broadcaster extends PluginBase {
         return $str;
     }
     
-    //API Functions
-    
     /**
      * Get Broadcaster API
      *
@@ -132,7 +131,7 @@ class Broadcaster extends PluginBase {
      * @return string
      */
     public function getVersion(){
-        return $this->getVersion();
+        return $this->getDescription()->getVersion();
     }
     
     /**
@@ -142,6 +141,18 @@ class Broadcaster extends PluginBase {
      */
     public function getAPIVersion(){
         return self::API_VERSION;
+    }
+    
+    /**
+     * Reload Broadcaster configuration
+     */
+    public function reload(){
+        $this->reloadConfig();
+        $this->cfg = $this->getConfig()->getAll();
+        $this->mtask->remove();
+        $this->ptask->remove();
+        $this->ttask->remove();
+        $this->initTasks();
     }
     
     /**
@@ -158,7 +169,7 @@ class Broadcaster extends PluginBase {
         }
         if($this->cfg["title-broadcast"]["enabled"]){
             $ttime = intval($this->cfg["title-broadcast"]["time"]) * 20;
-            $this->ttask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\TitleTask($this), $mtime);
+            $this->ttask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\TitleTask($this), $ttime);
         }
     }
     
@@ -182,12 +193,12 @@ class Broadcaster extends PluginBase {
     /**
      * Broadcast message, popup or title
      * 
-     * @param Player $recipient
      * @param int $type
      * @param string $sender
      * @param string $message
+     * @param Player $recipient
      */
-    public function broadcast(Player $recipient, int $type, $sender, $message){
+    public function broadcast(int $type, $sender, $message, Player $recipient = null){
         switch($type){
             default:
             case self::TYPE_MESSAGE:
@@ -216,15 +227,29 @@ class Broadcaster extends PluginBase {
         switch($type){
             default:
             case self::TYPE_MESSAGE:
-                $recipient->sendMessage($this->translateColors("&", $msg));
-                break;
+                if($recipient){
+                    $recipient->sendMessage($this->translateColors("&", $msg));
+                    return;
+                }
+                foreach($this->getServer()->getOnlinePlayers() as $player){
+                    $player->sendMessage($this->translateColors("&", str_replace("{PLAYER}", $player->getName(), $msg)));
+                }
+                return;
             case self::TYPE_POPUP:
-                $this->getServer()->getScheduler()->scheduleTask(new PopupDurationTask($this, $msg, $recipient, $this->cfg["popup-broadcast"]["duration"]));
-                break;
+                $this->getServer()->getScheduler()->scheduleTask(new Tasks\PopupDurationTask($this, $msg, $recipient, $this->cfg["popup-broadcast"]["duration"]));
+                return;
             case self::TYPE_TITLE:
-                $msg = explode("{SUBTITLE}", $msg);
-                $recipient->addTitle($this->translateColors("&", $msg[0]), isset($msg[1]) ? $this->translateColors("&", $msg[1]) : "");
-                break;
+                if($recipient){
+                    $msg = explode("{SUBTITLE}", $msg);
+                    $recipient->addTitle($this->translateColors("&", $msg[0]), isset($msg[1]) ? $this->translateColors("&", $msg[1]) : "");
+                    return;
+                }
+                foreach($this->getServer()->getOnlinePlayers() as $player){
+                    $out = str_replace("{PLAYER}", $player->getName(), $msg);
+                    $out = explode("{SUBTITLE}", $out);
+                    $player->addTitle($this->translateColors("&", $out[0]), isset($out[1]) ? $this->translateColors("&", $out[1]) : "");
+                }
+                return;
         }
     }
     

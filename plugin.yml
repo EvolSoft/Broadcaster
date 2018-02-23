@@ -1,7 +1,7 @@
 name: Broadcaster
 main: Broadcaster\Broadcaster
-version: 1.2
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
+version: 1.3
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11]
 load: STARTUP
 author: EvolSoft
 description: Advanced Broadcasting plugin
@@ -34,6 +34,9 @@ permissions:
    broadcaster.reload:
     default: op
     description: Let player reload Broadcaster.
+   broadcaster.update:
+    default: op
+    description: Let player update Broadcaster.
    broadcaster.sendmessage:
     default: op
     description: Let player send messages to players with /sendmessage command.

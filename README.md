@@ -10,30 +10,22 @@ PocketMine-MP plugins
 
 ## Requirements
 
-PocketMine-MP 1.7dev API 3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10
+PocketMine-MP 1.7dev API 3.0.0-ALPHA7 -> 3.0.0-ALPHA11
 
 ## Overview
 
 **Broadcaster** is an advanced Broadcasting plugin for PocketMine-MP.
+With Broadcaster you can set custom message, popup and title broadcasts. You can also send messages with /sm, popups with /sp and titles with /st commands.
+This plugin let you also customize colors (you can use the & sign instead of § for text format), prefixes, suffixes and intervals.
 
 **EvolSoft Website:** https://www.evolsoft.tk
 
 ***This Plugin uses the New API. You can't install it on old versions of PocketMine.***
 
-With Broadcaster you can set custom message/popup and title broadcasts. You can also send messages with /sm, send popups with /sp and send titles with /st commands.<br>
-You can also customize colors, prefixes, suffixes and intervals. You can use the & sign instead of §.
-
-**Commands:**
-
-<dd><i><b>/broadcaster</b> - Broadcaster commands</i></dd>
-<dd><i><b>/sendmessage</b> - Send message to the specified player (* for all players)</i></dd>
-<dd><i><b>/sendpopup</b> - Send popup to the specified player (* for all players)</i></dd>
-<dd><i><b>/sendtitle</b> - Send title to the specified player (* for all players)</i></dd>
-<br>
-
 ## Donate
 
-Support the development of this plugin with a small donation by clicking [:dollar: here](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=flavius.c.1999@gmail.com&lc=US&item_name=www.evolsoft.tk&no_note=0&cn=&curency_code=EUR&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted). Thank you :smile:
+Please support the development of this plugin with a small donation by clicking [:dollar: here](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=flavius.c.1999@gmail.com&lc=US&item_name=www.evolsoft.tk&no_note=0&cn=&curency_code=EUR&bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted). 
+Your small donation will help me paying web hosting, domains, buying programs (such as IDEs, debuggers, etc...) and new hardware to improve software development. Thank you :smile:
 
 ## Documentation
 
