@@ -14,8 +14,8 @@ PocketMine-MP 1.7dev API 3.0.0-ALPHA7 -> 3.0.0-ALPHA11
 
 ## Overview
 
-**Broadcaster** is an advanced Broadcasting plugin for PocketMine-MP.
-With Broadcaster you can set custom message, popup and title broadcasts. You can also send messages with /sm, popups with /sp and titles with /st commands.
+**Broadcaster** is an advanced Broadcasting plugin for PocketMine-MP.<br>
+With Broadcaster you can set custom message, popup and title broadcasts. You can also send messages with /sm, popups with /sp and titles with /st commands.<br>
 This plugin let you also customize colors (you can use the & sign instead of § for text format), prefixes, suffixes and intervals.
 
 **EvolSoft Website:** https://www.evolsoft.tk
