@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Broadcaster (v1.3) by EvolSoft
+ * Broadcaster (v1.4) by EvolSoft
  * Developer: EvolSoft (Flavius12)
  * Website: https://www.evolsoft.tk
  * Date: 01/02/2018 01:06 PM (UTC)
