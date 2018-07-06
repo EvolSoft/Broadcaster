@@ -1,11 +1,10 @@
 <?php
 
 /*
- * Broadcaster (v1.4) by EvolSoft
- * Developer: EvolSoft (Flavius12)
+ * Broadcaster v1.5 by EvolSoft
+ * Developer: Flavius12
  * Website: https://www.evolsoft.tk
- * Date: 01/02/2018 01:07 PM (UTC)
- * Copyright & License: (C) 2014-2018 EvolSoft
+ * Copyright (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
@@ -14,11 +13,12 @@ namespace Broadcaster\Commands;
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
-use pocketmine\plugin\PluginBase;
+use pocketmine\command\PluginCommand;
+use pocketmine\utils\TextFormat;
 
 use Broadcaster\Broadcaster;
 
-class SendTitle extends PluginBase implements CommandExecutor {
+class SendTitle extends PluginCommand implements CommandExecutor {
     
     /** @var Broadcaster */
     private $plugin;
@@ -35,13 +35,13 @@ class SendTitle extends PluginBase implements CommandExecutor {
                 }else if(($player = $this->plugin->getServer()->getPlayerExact($args[0]))){
                     $this->plugin->broadcast(Broadcaster::TYPE_TITLE, $sender->getName(), $this->plugin->getMessagefromArray($args), $player);
                 }else{
-                    $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&cPlayer not found"));
+                    $sender->sendMessage(TextFormat::colorize(Broadcaster::PREFIX . "&cPlayer not found"));
                 }
             }else{
-                $sender->sendMessage($this->plugin->translateColors("&", Broadcaster::PREFIX . "&cUsage: /st <player> <message>"));
+                $sender->sendMessage(TextFormat::colorize(Broadcaster::PREFIX . "&cUsage: /st <player> <message>"));
             }
         }else{
-            $sender->sendMessage($this->plugin->translateColors("&", "&cYou don't have permissions to use this command"));
+            $sender->sendMessage(TextFormat::colorize("&cYou don't have permissions to use this command"));
         }
         return true;
     }

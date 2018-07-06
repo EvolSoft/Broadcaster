@@ -1,36 +1,38 @@
 <?php
 
 /*
- * Broadcaster (v1.4) by EvolSoft
- * Developer: EvolSoft (Flavius12)
+ * Broadcaster v1.5 by EvolSoft
+ * Developer: Flavius12
  * Website: https://www.evolsoft.tk
- * Date: 01/02/2018 04:43 PM (UTC)
- * Copyright & License: (C) 2014-2018 EvolSoft
+ * Copyright (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
 namespace Broadcaster\Tasks;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
+use pocketmine\utils\TextFormat;
 
 use Broadcaster\Broadcaster;
 
-class MessageTask extends PluginTask {
+class MessageTask extends Task {
+    
+    /** @var Broadcaster */
+    private $plugin;
     
     /** @var int */
     private $i;
     
     public function __construct(Broadcaster $plugin){
-        parent::__construct($plugin);
+        $this->plugin = $plugin;
 		$this->i = 0;
     }
 
     public function onRun(int $currentTick){
-    	$plugin = $this->getOwner();
-    	$messages = $plugin->cfg["message-broadcast"]["messages"];
+        $messages = $this->plugin->cfg["message-broadcast"]["messages"];
     	back:
     	if($this->i < count($messages)){
-    	    $plugin->getServer()->broadcastMessage($plugin->translateColors("&", $plugin->formatMessage($messages[$this->i])));
+    	    $this->plugin->getServer()->broadcastMessage(TextFormat::colorize($this->plugin->formatMessage($messages[$this->i])));
     	    $this->i++;
     	}else{
 		    $this->i = 0;

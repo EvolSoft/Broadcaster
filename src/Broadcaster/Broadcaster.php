@@ -1,16 +1,14 @@
 <?php
 
 /*
- * Broadcaster (v1.4) by EvolSoft
- * Developer: EvolSoft (Flavius12)
+ * Broadcaster v1.5 by EvolSoft
+ * Developer: Flavius12
  * Website: https://www.evolsoft.tk
- * Date: 01/02/2018 01:09 PM (UTC)
- * Copyright & License: (C) 2014-2018 EvolSoft
+ * Copyright (C) 2014-2018 EvolSoft
  * Licensed under MIT (https://github.com/EvolSoft/Broadcaster/blob/master/LICENSE)
  */
 
 namespace Broadcaster;
-
 
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -48,41 +46,6 @@ class Broadcaster extends PluginBase {
     
     /** @var Broadcaster */
     private static $instance = null;
-
-    /**
-     * Translate Minecraft colors
-     * 
-     * @param string $symbol
-     * @param string $message
-     * 
-     * @return string
-     */
-    public function translateColors($symbol, $message){
-        $message = str_replace($symbol . "0", TextFormat::BLACK, $message);
-        $message = str_replace($symbol . "1", TextFormat::DARK_BLUE, $message);
-        $message = str_replace($symbol . "2", TextFormat::DARK_GREEN, $message);
-        $message = str_replace($symbol . "3", TextFormat::DARK_AQUA, $message);
-        $message = str_replace($symbol . "4", TextFormat::DARK_RED, $message);
-        $message = str_replace($symbol . "5", TextFormat::DARK_PURPLE, $message);
-        $message = str_replace($symbol . "6", TextFormat::GOLD, $message);
-        $message = str_replace($symbol . "7", TextFormat::GRAY, $message);
-        $message = str_replace($symbol . "8", TextFormat::DARK_GRAY, $message);
-        $message = str_replace($symbol . "9", TextFormat::BLUE, $message);
-        $message = str_replace($symbol . "a", TextFormat::GREEN, $message);
-        $message = str_replace($symbol . "b", TextFormat::AQUA, $message);
-        $message = str_replace($symbol . "c", TextFormat::RED, $message);
-        $message = str_replace($symbol . "d", TextFormat::LIGHT_PURPLE, $message);
-        $message = str_replace($symbol . "e", TextFormat::YELLOW, $message);
-        $message = str_replace($symbol . "f", TextFormat::WHITE, $message);
-        
-        $message = str_replace($symbol . "k", TextFormat::OBFUSCATED, $message);
-        $message = str_replace($symbol . "l", TextFormat::BOLD, $message);
-        $message = str_replace($symbol . "m", TextFormat::STRIKETHROUGH, $message);
-        $message = str_replace($symbol . "n", TextFormat::UNDERLINE, $message);
-        $message = str_replace($symbol . "o", TextFormat::ITALIC, $message);
-        $message = str_replace($symbol . "r", TextFormat::RESET, $message);
-        return $message;
-    }
     
     public function onLoad(){
         if(!self::$instance instanceof Broadcaster){
@@ -161,15 +124,15 @@ class Broadcaster extends PluginBase {
     public function initTasks(){
         if($this->cfg["message-broadcast"]["enabled"]){
             $mtime = intval($this->cfg["message-broadcast"]["time"]) * 20;
-            $this->mtask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\MessageTask($this), $mtime);
+            $this->mtask = $this->getScheduler()->scheduleRepeatingTask(new Tasks\MessageTask($this), $mtime);
         }
         if($this->cfg["popup-broadcast"]["enabled"]){
             $ptime = intval($this->cfg["popup-broadcast"]["time"]) * 20;
-            $this->ptask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\PopupTask($this), $ptime);
+            $this->ptask = $this->getScheduler()->scheduleRepeatingTask(new Tasks\PopupTask($this), $ptime);
         }
         if($this->cfg["title-broadcast"]["enabled"]){
             $ttime = intval($this->cfg["title-broadcast"]["time"]) * 20;
-            $this->ttask = $this->getServer()->getScheduler()->scheduleRepeatingTask(new Tasks\TitleTask($this), $ttime);
+            $this->ttask = $this->getScheduler()->scheduleRepeatingTask(new Tasks\TitleTask($this), $ttime);
         }
     }
     
@@ -228,11 +191,11 @@ class Broadcaster extends PluginBase {
             default:
             case self::TYPE_MESSAGE:
                 if($recipient){
-                    $recipient->sendMessage($this->translateColors("&", $msg));
+                    $recipient->sendMessage(TextFormat::colorize($msg));
                     return;
                 }
                 foreach($this->getServer()->getOnlinePlayers() as $player){
-                    $player->sendMessage($this->translateColors("&", str_replace("{PLAYER}", $player->getName(), $msg)));
+                    $player->sendMessage(TextFormat::colorize(str_replace("{PLAYER}", $player->getName(), $msg)));
                 }
                 return;
             case self::TYPE_POPUP:
@@ -241,13 +204,13 @@ class Broadcaster extends PluginBase {
             case self::TYPE_TITLE:
                 if($recipient){
                     $msg = explode("{SUBTITLE}", $msg);
-                    $recipient->addTitle($this->translateColors("&", $msg[0]), isset($msg[1]) ? $this->translateColors("&", $msg[1]) : "");
+                    $recipient->addTitle(TextFormat::colorize($msg[0]), isset($msg[1]) ? TextFormat::colorize($msg[1]) : "");
                     return;
                 }
                 foreach($this->getServer()->getOnlinePlayers() as $player){
                     $out = str_replace("{PLAYER}", $player->getName(), $msg);
                     $out = explode("{SUBTITLE}", $out);
-                    $player->addTitle($this->translateColors("&", $out[0]), isset($out[1]) ? $this->translateColors("&", $out[1]) : "");
+                    $player->addTitle(TextFormat::colorize($out[0]), isset($out[1]) ? TextFormat::colorize($out[1]) : "");
                 }
                 return;
         }
