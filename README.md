@@ -4,6 +4,8 @@
 
 Advanced Broadcasting plugin for PocketMine-MP
 
+[![Download!](https://user-images.githubusercontent.com/10297075/101246002-cb046780-3710-11eb-950f-ba06934b8138.png)](http://gestyy.com/er3dEU)
+
 ## Category
 
 PocketMine-MP plugins
